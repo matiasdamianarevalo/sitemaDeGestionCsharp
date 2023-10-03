@@ -1,0 +1,66 @@
+namespace Proyecto
+{
+    public class Producto
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public decimal Precio { get; set; }
+    }
+
+    public class ProductoData
+    {
+        private List<Producto> productos;
+
+        public ProductoData()
+        {
+            productos = new List<Producto>();
+        }
+
+        public List<Producto> ObtenerProductos()
+        {
+            return productos;
+        }
+
+        public void ListarProductos()
+        {
+            Console.WriteLine("Lista de productos:");
+            foreach (var producto in productos)
+            {
+                Console.WriteLine($"ID: {producto.Id}, Nombre: {producto.Nombre}, Precio: {producto.Precio}");
+            }
+        }
+
+        public void CrearProducto(Producto producto)
+        {
+            productos.Add(producto);
+            Console.WriteLine("Producto creado exitosamente.");
+        }
+        public void ModificarProducto(int id, Producto productoModificado)
+        {
+            var productoExistente = productos.Find(p => p.Id == id);
+            if (productoExistente != null)
+            {
+                productoExistente.Nombre = productoModificado.Nombre;
+                productoExistente.Precio = productoModificado.Precio;
+                Console.WriteLine("Producto modificado exitosamente.");
+            }
+            else
+            {
+                Console.WriteLine("No se encontró ningún producto con el ID especificado.");
+            }
+        }
+
+        public void EliminarProducto(int id)
+        {
+            var productoExistente = productos.Find(p => p.Id == id);
+            if (productoExistente != null)
+            {
+                productos.Remove(productoExistente);
+                Console.WriteLine("Producto eliminado exitosamente.");
+            }
+            else
+            {
+                Console.WriteLine("No se encontró ningún producto con el ID especificado.");
+            }
+        }
+    }
